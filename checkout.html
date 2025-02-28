@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - TimeCraft</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">TimeCraft</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="cart-icon" id="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+        </div>
+        <div class="hamburger" id="hamburger">☰</div>
+    </nav>
+
+    <!-- Checkout Section -->
+    <section class="checkout">
+        <h2>Checkout</h2>
+        <div class="checkout-container">
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be dynamically inserted here -->
+                </div>
+                <div class="order-total">
+                    <h4>Total:</h4>
+                    <span ><p id="total-price"></p></span>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+                <h3>Shipping & Payment Details</h3>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Provance">Provance</label>
+                        <select id="Provance" name="Provance"  required>
+                            <option value="//">Select Provance</option> 
+                            <option value="Sindh">Sindh</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Balochistan">Balochistan</option>
+                            <option value="kpk">Khyber Pakhtoon Khuwa</option>
+                            <option value="Gilgit">Gilgit Baltistan</option>
+                            <option value="Azad Kashmir">Azad Kashmir</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="City">City</label>
+                        <input type="text" id="City" name="City" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="District">District</label>
+                        <input type="text" id="District" name="District" required>
+                    </div>
+                  
+                    <div class="form-group">
+                        <label for="address">Shipping Address</label>
+                        <textarea id="address" name="address" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment">Payment Method</label>
+                        <select id="payment" name="payment" required>
+                            <option value="credit_card">Credit Card</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="cash_on_delivery">Cash on Delivery</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="cta1">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TimeCraft</h3>
+                <p>Your destination for premium watches.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 TimeCraft. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <!-- Add this before the closing </body> tag -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS with your User ID
+    emailjs.init("j8ci8IXWa2Ka2fqXc");
+</script>
+</body>
+</html>
