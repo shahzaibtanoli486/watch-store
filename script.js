@@ -131,12 +131,11 @@ document.addEventListener("click", (e) => {
 });
 
 
-
-// Render Order Summary on Checkout Page
-const orderItemsContainer = document.getElementById("cart-items");
+// Render Cart Items on Cart Page
+const cartItemsContainer = document.getElementById("cart-items");
 const totalPriceElement = document.getElementById("total-price");
 
-if (orderItemsContainer && totalPriceElement) {
+if (cartItemsContainer && totalPriceElement) {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     let totalPrice = 0;
 
@@ -144,28 +143,28 @@ if (orderItemsContainer && totalPriceElement) {
         const itemPrice = parseFloat(item.price.replace("$", ""));
         totalPrice += itemPrice * item.quantity;
 
-        const orderItem = document.createElement("div");
-        orderItem.classList.add("order-item");
-        orderItem.innerHTML = `
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+        cartItem.innerHTML = `
             <img src="${item.image}" alt="${item.name}">
-            <div class="order-item-info">
-                <h4>${item.name}</h4>
+            <div class="item-info">
+                <h3>${item.name}</h3>
                 <p>${item.price} x ${item.quantity}</p>
             </div>
+            <button class="remove-item" data-id="${item.id}">Remove</button>
         `;
-        orderItemsContainer.appendChild(orderItem);
+        cartItemsContainer.appendChild(cartItem);
     });
 
     totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
 }
-
-
 // Function to Remove Item from Cart
 function removeFromCart(productId) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.filter(item => item.id != productId);
     localStorage.setItem("cart", JSON.stringify(cart));
-    renderCartItems();
-    updateCartIcon();
+    renderCartItems(); // Re-render the cart items
+    updateCartIcon(); // Update the cart icon count
 }
 
 // Event Listener for Remove Buttons
@@ -175,6 +174,36 @@ document.addEventListener("click", (e) => {
         removeFromCart(productId);
     }
 });
+
+// Function to Re-render Cart Items
+function renderCartItems() {
+    if (cartItemsContainer && totalPriceElement) {
+        cartItemsContainer.innerHTML = "";
+        let totalPrice = 0;
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.forEach(item => {
+            const itemPrice = parseFloat(item.price.replace("$", ""));
+            totalPrice += itemPrice * item.quantity;
+
+            const cartItem = document.createElement("div");
+            cartItem.classList.add("cart-item");
+            cartItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div class="item-info">
+                    <h3>${item.name}</h3>
+                    <p>${item.price} x ${item.quantity}</p>
+                </div>
+                <button class="remove-item" data-id="${item.id}">Remove</button>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+        });
+
+        totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+    }
+}
+
+
 
 // Initialize Cart Icon on Page Load
 updateCartIcon();
