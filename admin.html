@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - TimeCraft</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Admin Login Section -->
+    <section class="admin-login">
+        <h2>Admin Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="cta">Login</button>
+        </form>
+    </section>
+
+    <!-- Admin Dashboard (Hidden by Default) -->
+    <section class="admin-dashboard" id="admin-dashboard" style="display: none;">
+        <h2>Admin Dashboard</h2>
+
+        <!-- Product Management Section -->
+        <div class="product-management">
+            <h3>Manage Products</h3>
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name (English)</label>
+                    <input type="text" id="product-name-en" name="product-name-en" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-name">Product Name (Spanish)</label>
+                    <input type="text" id="product-name-es" name="product-name-es" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-name">Product Name (French)</label>
+                    <input type="text" id="product-name-fr" name="product-name-fr" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description (English)</label>
+                    <textarea id="product-description-en" name="product-description-en" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description (Spanish)</label>
+                    <textarea id="product-description-es" name="product-description-es" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description (French)</label>
+                    <textarea id="product-description-fr" name="product-description-fr" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-image">Product Image URL</label>
+                    <input type="url" id="product-image" name="product-image" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Price</label>
+                    <input type="number" id="product-price" name="product-price" step="0.01" required>
+                </div>
+                <button type="submit" class="cta">Add Product</button>
+            </form>
+        </div>
+
+        <!-- Product List -->
+        <div class="product-list">
+            <h3>Product List</h3>
+            <table id="product-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name (English)</th>
+                        <th>Name (Spanish)</th>
+                        <th>Name (French)</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Products will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

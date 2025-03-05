@@ -305,3 +305,111 @@ function calculateTotalPrice() {
         return total + price * item.quantity;
     }, 0);
 }
+
+
+
+// Product Data (Stored in localStorage)
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+// Admin Login
+const loginForm = document.getElementById("login-form");
+const adminDashboard = document.getElementById("admin-dashboard");
+
+if (loginForm) {
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Hardcoded credentials for demo
+        if (username === "admin" && password === "admin123") {
+            adminDashboard.style.display = "block";
+            loginForm.style.display = "none";
+            renderProductTable();
+        } else {
+            alert("Invalid username or password.");
+        }
+    });
+}
+
+// Add Product Form
+const productForm = document.getElementById("product-form");
+
+if (productForm) {
+    productForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const product = {
+            id: Date.now(),
+            name: {
+                en: document.getElementById("product-name-en").value,
+                es: document.getElementById("product-name-es").value,
+                fr: document.getElementById("product-name-fr").value,
+            },
+            description: {
+                en: document.getElementById("product-description-en").value,
+                es: document.getElementById("product-description-es").value,
+                fr: document.getElementById("product-description-fr").value,
+            },
+            image: document.getElementById("product-image").value,
+            price: parseFloat(document.getElementById("product-price").value).toFixed(2),
+        };
+
+        products.push(product);
+        localStorage.setItem("products", JSON.stringify(products));
+        renderProductTable();
+        productForm.reset();
+    });
+}
+
+// Render Product Table
+function renderProductTable() {
+    const productTable = document.getElementById("product-table").getElementsByTagName("tbody")[0];
+    productTable.innerHTML = "";
+
+    products.forEach((product) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td><img src="${product.image}" alt="${product.name.en}"></td>
+            <td>${product.name.en}</td>
+            <td>${product.name.es}</td>
+            <td>${product.name.fr}</td>
+            <td>$${product.price}</td>
+            <td class="actions">
+                <button onclick="editProduct(${product.id})">Edit</button>
+                <button onclick="deleteProduct(${product.id})">Delete</button>
+            </td>
+        `;
+        productTable.appendChild(row);
+    });
+}
+
+// Edit Product
+function editProduct(id) {
+    const product = products.find((p) => p.id === id);
+    if (product) {
+        document.getElementById("product-name-en").value = product.name.en;
+        document.getElementById("product-name-es").value = product.name.es;
+        document.getElementById("product-name-fr").value = product.name.fr;
+        document.getElementById("product-description-en").value = product.description.en;
+        document.getElementById("product-description-es").value = product.description.es;
+        document.getElementById("product-description-fr").value = product.description.fr;
+        document.getElementById("product-image").value = product.image;
+        document.getElementById("product-price").value = product.price;
+
+        // Remove the product from the list
+        products = products.filter((p) => p.id !== id);
+        localStorage.setItem("products", JSON.stringify(products));
+        renderProductTable();
+    }
+}
+
+// Delete Product
+function deleteProduct(id) {
+    products = products.filter((p) => p.id !== id);
+    localStorage.setItem("products", JSON.stringify(products));
+    renderProductTable();
+}
+
+
